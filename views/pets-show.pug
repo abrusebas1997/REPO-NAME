@@ -5,7 +5,7 @@ block content
     .col-sm-4
       if pet.avatarUrl
         img.card-img-top(src=pet.avatarUrl + '-square.', alt='Card image cap')
-        else
+      else
         img.card-img-top(src=pet.picUrlSq, alt='Card image cap')
     .col-sm-8
       h1=pet.name
@@ -14,3 +14,4 @@ block content
       p=pet.description
       .text-right
         a(href="/pets/" + pet.id + "/edit").btn-link Edit
+      

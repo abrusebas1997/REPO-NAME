@@ -56,7 +56,7 @@ describe('Pets', ()  => {
         res.should.be.html;
         done();
       });
-  })
+  });
 
   // TEST CREATE
   it('should create a SINGLE pet on /pets POST', (done) => {
