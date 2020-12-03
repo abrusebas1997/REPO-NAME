@@ -3,7 +3,6 @@ if (!process.env.PORT) {
   process.env.NODE_ENV = "dev"
 }
 
-
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -15,7 +14,7 @@ const methodOverride = require('method-override')
 const app = express();
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/petes-pets',  { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost/petes-pets', { useNewUrlParser: true, useUnifiedTopology: true });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -35,6 +34,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 require('./routes/index.js')(app);
 require('./routes/pets.js')(app);
 
+// server.js
+app.locals.PUBLIC_STRIPE_API_KEY = process.env.PUBLIC_STRIPE_API_KEY
+
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   const err = new Error('Not Found');
@@ -53,6 +55,19 @@ app.use((err, req, res, next) => {
   res.render('error');
 });
 
-app.locals.PUBLIC_STRIPE_API_KEY = process.env.PUBLIC_STRIPE_API_KEY
+// require our mailgun dependencies
+const nodemailer = require('nodemailer');
+const mg = require('nodemailer-mailgun-transport');
+
+// auth with our mailgun API key and domain
+const auth = {
+  auth: {
+    api_key: 'key-keyaldkjfadfasdfadsfadsf',
+    domain: 'domain.com'
+  }
+}
+
+// create a mailer
+const nodemailerMailgun = nodemailer.createTransport(mg(auth));
 
 module.exports = app;

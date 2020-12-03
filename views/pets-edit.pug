@@ -7,32 +7,26 @@ block content
             legend New Pet
             form(action=`/pets/${pet._id}?_method=PUT`, method="POST")
                 .form-group
-                    label Name *
+                    label Name
                     input.form-control(name="name" value=pet.name)
                 .form-group
-                    label Species *
+                    label Price*
+                    textarea.form-control(name="price" required type="number")
+                .form-group
+                    label Species
                     input.form-control(name="species" value=pet.species)
                 .form-group
-                    label Rectangular Image URL *
-                    input.form-control(name="picUrl" value=pet.picUrl)
-                .form-group
-                    label Square Image URL *
-                    input.form-control(name="picUrlSq" value=pet.picUrlSq)
-                .form-group
-                    label Avatar *
+                    label Avatar*
                     input.form-control(name="avatar" type="file" required)
                 .form-group
-                    label Birthday *
+                    label Birthday
                     input.form-control(name="birthday" value=pet.birthday)
                 .form-group
-                    label Favorite Food *
+                    label Favorite Food
                     input.form-control(name="favoriteFood" value=pet.favoriteFood)
                 .form-group
-                    label Description *
+                    label Description
                     textarea.form-control(name="description")= pet.description
-                .form-group
-                    label Price *
-                    textarea.form-control(name="price" required type="number")
                 button(type="submit").btn.btn-primary Save
             .text-right
                 form(action=`/pets/${pet._id}?_method=DELETE`, method="POST")
