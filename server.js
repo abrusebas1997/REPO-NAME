@@ -3,6 +3,7 @@ if (!process.env.PORT) {
   process.env.NODE_ENV = "dev"
 }
 
+
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -51,5 +52,7 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.render('error');
 });
+
+app.locals.PUBLIC_STRIPE_API_KEY = process.env.PUBLIC_STRIPE_API_KEY
 
 module.exports = app;
